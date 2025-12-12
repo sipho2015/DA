@@ -1,0 +1,22 @@
+.search-wrap{
+  padding: 0 6px;
+  .search-card{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: var(--shadow-1);
+    input{
+      border: none;
+      outline: none;
+      font-size:14px;
+      flex:1;
+      color:var(--muted);
+    }
+    .filters{
+      background:transparent;border:none;font-size:18px;color:var(--muted);cursor:pointer;
+    }
+  }
+}

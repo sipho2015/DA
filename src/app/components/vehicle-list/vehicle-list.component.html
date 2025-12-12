@@ -1,0 +1,22 @@
+<div class="list-wrap">
+  <div *ngFor="let g of groups" class="list-item" [class.open]="g.open">
+    <button class="row" (click)="toggle(g)">
+      <div class="left">
+        <div class="title">{{ g.name }}</div>
+        <div class="dot">•</div>
+        <div class="count">{{ g.count }}</div>
+      </div>
+      <div class="chev">{{ g.open ? '▾' : '▸' }}</div>
+    </button>
+
+    <div class="expand" *ngIf="g.open">
+      <div class="expanded-inner">
+        <div class="meta">Showing {{ g.count }} vehicles</div>
+        <div class="actions">
+          <button>View</button>
+          <button>Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

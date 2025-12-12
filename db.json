@@ -1,0 +1,6 @@
+{
+  "items": [
+    { "id": 1, "title": "Example Item 1", "description": "Demo item", "price": 19.99, "createdAt": "2024-12-01T12:00:00Z" },
+    { "id": 2, "title": "Example Item 2", "description": "Another example", "price": 5.50,  "createdAt": "2024-12-02T08:30:00Z" }
+  ]
+}

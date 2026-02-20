@@ -53,4 +53,8 @@ export class AddVehicleComponent {
   get model() { return this.vehicleForm.get('model'); }
   get year() { return this.vehicleForm.get('year'); }
   get plate() { return this.vehicleForm.get('plate'); }
+  get zinara(){ return this.vehicleForm.get('zinara'); }
+  get cof(){ return this.vehicleForm.get('cof'); }
+  get mileage(){ return this.vehicleForm.get('mileage'); }
+
 }

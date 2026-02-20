@@ -1,21 +1,24 @@
 <div class="list-wrap">
   <div *ngFor="let g of groups" class="list-item" [class.open]="g.open">
-    <button class="row" (click)="toggle(g)">
+    <button class="row" type="button" (click)="toggle(g)">
       <div class="left">
         <div class="title">{{ g.name }}</div>
-        <div class="dot">•</div>
+        <span class="dot" aria-hidden="true"></span>
         <div class="count">{{ g.count }}</div>
       </div>
-      <div class="chev">{{ g.open ? '▾' : '▸' }}</div>
+      <div class="chev" [class.open]="g.open" aria-hidden="true"></div>
     </button>
 
     <div class="expand" *ngIf="g.open">
-      <div class="expanded-inner">
-        <div class="meta">Showing {{ g.count }} vehicles</div>
-        <div class="actions">
-          <button>View</button>
-          <button>Edit</button>
-        </div>
+      <div class="meta">Showing {{ g.count }} vehicles</div>
+      <div class="plates">
+        <a
+          class="plate"
+          *ngFor="let item of g.plates"
+          [routerLink]="['/vehicles', item.id]"
+        >
+          {{ item.plate }}
+        </a>
       </div>
     </div>
   </div>

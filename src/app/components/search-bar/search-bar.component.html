@@ -1,7 +1,28 @@
 <div class="search-wrap">
   <div class="search-card">
-    <span class="search-icon">🔍</span>
-    <input placeholder="Search Vehicle" />
-    <button class="filters">≡</button>
+    <span class="search-icon" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"></circle>
+        <path d="M20 20L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+      </svg>
+    </span>
+    <input
+      placeholder="Search by vehicle type"
+      [value]="query"
+      (input)="onInput($any($event.target).value)"
+      (keyup.enter)="runSearch()"
+    />
+    <button class="search-btn" type="button" (click)="runSearch()">Search</button>
+  </div>
+
+  <div class="suggestions" *ngIf="suggestions?.length">
+    <button
+      type="button"
+      class="suggestion"
+      *ngFor="let s of suggestions"
+      (click)="pickSuggestion(s)"
+    >
+      {{ s }}
+    </button>
   </div>
 </div>

@@ -1,0 +1,39 @@
+<div class="vehicles-page">
+
+  <!-- Header row: title + add button -->
+  <div class="header">
+    <h1>Vehicles</h1>
+
+    <button class="add-btn" (click)="goToAddVehicle()">
+      + Add Vehicle
+    </button>
+  </div>
+
+  <div style="height:16px;"></div>
+
+  <app-stats-cards
+    [fleetCount]="fleetCount"
+    [activeCount]="activeCount"
+    [serviceCount]="serviceCount"
+    [documentationCount]="documentationCount"
+    [selected]="statusFilter"
+    (selectStatus)="onStatusChange($event)"
+  ></app-stats-cards>
+
+  <div class="fleet-summary">{{ summaryLabel }}</div>
+
+  <div style="height:16px;"></div>
+
+  <app-search-bar
+    [suggestions]="suggestions"
+    (search)="onSearch($event)"
+  ></app-search-bar>
+
+  <div style="height:16px;"></div>
+
+  <div *ngIf="loading">Loading vehicles...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <app-vehicle-list [groups]="groups"></app-vehicle-list>
+
+</div>

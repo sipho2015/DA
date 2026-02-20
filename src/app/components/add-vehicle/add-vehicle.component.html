@@ -3,12 +3,12 @@
 
   <form [formGroup]="vehicleForm" (ngSubmit)="save()" novalidate>
     <label>
-      Name
-      <input formControlName="name" placeholder="e.g. Toyota Corolla" />
+      Make
+      <input formControlName="make" placeholder="e.g. Toyota" />
     </label>
-    <div class="error" *ngIf="name?.touched && name?.invalid">
-      <small *ngIf="name?.errors?.['required']">Name is required.</small>
-      <small *ngIf="name?.errors?.['maxlength']">Name is too long.</small>
+    <div class="error" *ngIf="make?.touched && make?.invalid">
+      <small *ngIf="make?.errors?.['required']">Make is required.</small>
+      <small *ngIf="make?.errors?.['maxlength']">Make is too long.</small>
     </div>
 
     <label>
@@ -36,9 +36,20 @@
       <small *ngIf="plate?.errors?.['required']">Plate is required.</small>
     </div>
 
+    <label>
+      Status
+      <select formControlName="status">
+        <option value="active">Active</option>
+        <option value="service">Service</option>
+        <option value="documentation">Documentation</option>
+      </select>
+    </label>
+
     <div class="buttons">
       <button type="submit" [disabled]="saving">Save</button>
       <button type="button" (click)="cancel()" [disabled]="saving">Cancel</button>
     </div>
+
+    <div class="error" *ngIf="saveError">{{ saveError }}</div>
   </form>
 </div>

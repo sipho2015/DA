@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { VehicleService } from '../../services/vehicle';
 
 @Component({
   selector: 'app-add-vehicle',
@@ -13,14 +14,20 @@ import { Router, RouterModule } from '@angular/router';
 export class AddVehicleComponent {
   vehicleForm: FormGroup;
   saving = false;
+  saveError = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private vehicleService: VehicleService
+  ) {
     //i will have to create the form structure here so that the template can bind to it
     this.vehicleForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(50)]],
+      make: ['', [Validators.required, Validators.maxLength(50)]],
       model: ['', [Validators.required, Validators.maxLength(50)]],
       year: ['', [Validators.required, Validators.pattern(/^[0-9]{4}$/)]],
-      plate: ['', [Validators.required, Validators.maxLength(15)]]
+      plate: ['', [Validators.required, Validators.maxLength(15)]],
+      status: ['active', Validators.required]
     });
   }
 
@@ -32,14 +39,25 @@ export class AddVehicleComponent {
     }
 
     this.saving = true;
-    const newVehicle = this.vehicleForm.value;
-    console.log('Saving vehicle (stub):', newVehicle);
+    this.saveError = '';
+    const formValue = this.vehicleForm.value;
 
-    // I am to replaace this one with actual save logic later
-    setTimeout(() => {
-      this.saving = false;
-      this.router.navigate(['/vehicles']);
-    }, 600);
+    this.vehicleService.create({
+      make: formValue.make,
+      model: formValue.model,
+      year: Number(formValue.year),
+      plate: formValue.plate,
+      status: formValue.status
+    }).subscribe({
+      next: () => {
+        this.saving = false;
+        this.router.navigate(['/vehicles']);
+      },
+      error: () => {
+        this.saving = false;
+        this.saveError = 'Could not save vehicle. Check backend API connection.';
+      }
+    });
   }
 
   // It should be called when user clicks Cancel
@@ -48,8 +66,9 @@ export class AddVehicleComponent {
   }
 
   // Getters for easy access to form controls in the template
-  get name() { return this.vehicleForm.get('name'); }
+  get make() { return this.vehicleForm.get('make'); }
   get model() { return this.vehicleForm.get('model'); }
   get year() { return this.vehicleForm.get('year'); }
   get plate() { return this.vehicleForm.get('plate'); }
+  get status() { return this.vehicleForm.get('status'); }
 }

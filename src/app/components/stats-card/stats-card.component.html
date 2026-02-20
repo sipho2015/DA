@@ -1,24 +1,49 @@
 <div class="stats-wrap">
-  <h3 class="section-title">Vehicles <button class="add">+</button></h3>
-  <button (click)="Vehicle()"> <a href="new-vehicles">Add Vehicle</a></button>
-
   <div class="cards">
-    <div class="card">
-      <div class="icon">🚍</div>
+    <button class="card" type="button" [class.active]="selected === 'all'" (click)="select('all')">
+      <div class="icon fleet" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M3 13L5 7H17L21 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5 13V17H7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M17 13V17H15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="7" cy="17" r="2" stroke="currentColor" stroke-width="1.8"/>
+          <circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      </div>
       <div class="label">Fleet</div>
-      <div class="value">22</div>
-    </div>
+      <div class="value">{{ fleetCount }}</div>
+    </button>
 
-    <div class="card">
-      <div class="icon">⚡</div>
+    <button class="card" type="button" [class.active]="selected === 'active'" (click)="select('active')">
+      <div class="icon active" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M13 2L3 14H11L9 22L21 9H13L15 2H13Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <div class="label">Active</div>
-      <div class="value">19</div>
-    </div>
+      <div class="value">{{ activeCount }}</div>
+    </button>
 
-    <div class="card">
-      <div class="icon">🔧</div>
+    <button class="card" type="button" [class.active]="selected === 'service'" (click)="select('service')">
+      <div class="icon service" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M14 7L17 10L10 17H7V14L14 7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M9 5L11 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </div>
       <div class="label">Service</div>
-      <div class="value">3</div>
-    </div>
+      <div class="value">{{ serviceCount }}</div>
+    </button>
+
+    <button class="card" type="button" [class.active]="selected === 'documentation'" (click)="select('documentation')">
+      <div class="icon documentation" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M6 3H14L18 7V21H6V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M14 3V7H18" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="label">Documentation</div>
+      <div class="value">{{ documentationCount }}</div>
+    </button>
   </div>
 </div>

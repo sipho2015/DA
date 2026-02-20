@@ -1,5 +1,19 @@
-<div class="vehicle-list">
-<h2>Vehicle Details</h2>
-<!-- + Button to navigate to Add Vehicle page -->
- <button class ="add-vehicle-button">+</button>
-  <button routerLink="/vehicles/new" class="add-vehicle-btn">+</button>
+<div class="vehicle-detail">
+  <h2>Vehicle Details</h2>
+
+  <div *ngIf="loading">Loading vehicle...</div>
+  <div class="error" *ngIf="error">{{ error }}</div>
+
+  <div *ngIf="!loading && vehicle" class="card">
+    <div><strong>Make:</strong> {{ vehicle.make }}</div>
+    <div><strong>Model:</strong> {{ vehicle.model }}</div>
+    <div><strong>Year:</strong> {{ vehicle.year }}</div>
+    <div><strong>Plate:</strong> {{ vehicle.plate }}</div>
+    <div><strong>Status:</strong> {{ vehicle.status }}</div>
+  </div>
+
+  <div class="actions">
+    <button routerLink="/vehicles/new" class="add-vehicle-btn">+ Add Vehicle</button>
+    <button routerLink="/vehicles" class="back-btn">Back</button>
+  </div>
+</div>
